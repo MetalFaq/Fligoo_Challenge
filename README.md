@@ -42,13 +42,24 @@ This app requires Python 3.10 to run
 <ul>
 <li>
 Git Clone: <br>
-<code>$ git clone (INSERTAR LINK DEL REPO)</code>
+<code>$ git clone https://github.com/MetalFaq/Fligoo_Challenge.git</code>
 </li>
+
 <li>
 Install the dependencies from requirements.txt by creating and activating a
-new virtual environment. (INSERTAR CÓDIGO)
+new virtual environment: <br>
+<code>
+F:\> cd F:\src\tictactoe <br>
+F:\src\tictactoe > pip install requirements.txt
+</code>
 </li> 
+
 </ul>
 
 ### Running the app
 INSERTAR COMANDOS. 
+<code>
+F:\> cd F:\src\tictactoe <br>
+python app.py <br>
+Open browser to http://localhost:8000/docs
+</code>
