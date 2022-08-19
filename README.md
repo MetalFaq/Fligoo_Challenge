@@ -41,7 +41,8 @@ there was some kind of problem with the input data."
 This app requires Python 3.10 to run
 <ul>
 <li>
-Git Clone (INSERTAR LINK DEL REPO)
+Git Clone: <br>
+<code>$ git clone (INSERTAR LINK DEL REPO)</code>
 </li>
 <li>
 Install the dependencies from requirements.txt by creating and activating a
