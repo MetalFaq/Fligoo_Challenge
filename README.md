@@ -49,17 +49,16 @@ Git Clone: <br>
 Install the dependencies from requirements.txt by creating and activating a
 new virtual environment: <br>
 <code>
-F:\> cd F:\src\tictactoe <br>
-F:\src\tictactoe > pip install requirements.txt
+F:\> cd F:\src\tictactoe 
+</code><br>
+<code>
+ F:\src\tictactoe > pip install requirements.txt
 </code>
 </li> 
-
 </ul>
 
 ### Running the app
-INSERTAR COMANDOS. 
-<code>
-F:\> cd F:\src\tictactoe <br>
-python app.py <br>
-Open browser to http://localhost:8000/docs
-</code>
+
+<code>F:\> cd F:\src\tictactoe</code> <br>
+<code>python app.py </code><br>
+<code>Open browser to http://localhost:8000/docs</code>
