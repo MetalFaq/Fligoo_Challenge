@@ -1,0 +1,14 @@
+Tech:
+* SQLite: 
+Suitable for smaller databases and is more effective when developing small standalone app (such is this case). 
+Furthermore, SQLite provide local data storage
+
+* sqlalchemy: 
+It allows to manipulate information that is stored in a database.
+Is the Python SQL toolkit and Object Relational Mapper that gives application developers the full power and flexibility of SQL.
+(ORM: Utility that allows us to manipulate the tables of a database as if they were objects of our program.) 
+
+* pydantic: Allows data validation
+
+* uvicorn:
+It's (simplified) the binding element that handles the web connections from the browser or api client and then allows FastAPI to serve the actual request.
