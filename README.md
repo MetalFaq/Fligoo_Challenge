@@ -60,5 +60,5 @@ F:\> cd F:\src\tictactoe
 ### Running the app
 
 <code>F:\> cd F:\src\tictactoe</code> <br>
-<code>python app.py </code><br>
+<code>F:\src\tictactoe> python app.py </code><br>
 <code>Open browser to http://localhost:8000/docs</code>
