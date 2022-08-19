@@ -50,13 +50,12 @@ Install the dependencies from requirements.txt by creating and activating a
 new virtual environment: <br>
 <code> F:\> cd F:\src\tictactoe </code><br>
 <code> F:\src\tictactor> python3 -m venv /path/to/new/virtual/environment </code> <br>
-<code> F:\src\tictactoe\venv\Scripts > activate </code> <br>
-<code> (venv) F:\src\tictactoe > pip install -r requirements.txt</code>
+<code> F:\src\tictactoe\venv\Scripts> activate </code> <br>
+<code> (venv) F:\src\tictactoe> pip install -r requirements.txt</code>
 </li> 
 </ul>
 
 ### Running the app
 
-<code>F:\> cd F:\src\tictactoe</code> <br>
-<code>F:\src\tictactoe> python app.py </code><br>
+<code>(venv) F:\src\tictactoe> python app.py </code><br>
 <code>Open browser to http://localhost:8000/docs</code>
