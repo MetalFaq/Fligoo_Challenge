@@ -52,7 +52,7 @@ new virtual environment: <br>
 F:\> cd F:\src\tictactoe 
 </code><br>
 <code>
- F:\src\tictactoe > pip install requirements.txt
+ F:\src\tictactoe > pip install -r requirements.txt
 </code>
 </li> 
 </ul>
