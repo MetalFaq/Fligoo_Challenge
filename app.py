@@ -14,7 +14,7 @@ import sql_app.schemas as schemas
 from sql_app.repositories import GameRepo
 from config.session import engine, get_db
 
-models.Base.metadata.create_all(bind=engine) #Union between the tables and the DB. 
+models.Base.metadata.create_all(bind=engine) #Create all tables. 
 #API definition
 app = FastAPI()
 
@@ -26,8 +26,16 @@ def main():
 # Create a game
 @app.post('/newgame')
 def new_game(game_request: schemas.GameCreate, db: Session = Depends(get_db)):
-    #logica para asignar al jugador que va a ir primero. 
-    #models.Game.next_turn = game_request.starting_player
+    
+    # Symbol validation
+    if game_request.player1.symbol == game_request.player2.symbol:        
+        return "Error: Same Symbol"
+    # Names validation
+    if game_request.player1.name == game_request.player2.name:
+        return "Error: Must be different name"
+    if game_request.starting_player != game_request.player1.name and game_request.starting_player != game_request.player2.name:
+        return "Error: Unregistered name."
+    
     return GameRepo.create(db, game = game_request)
 
 # Submit a play
@@ -44,29 +52,26 @@ def submit_play(move_request: schemas.Move, db: Session = Depends(get_db)):
     juego = GameRepo.find_by_id(db, id)
 
     if juego:       
+        
+        if juego.winner != None:
+            return "Error: Finished game"
 
         # Deserialize player's info. 
         p1 = json.loads(juego.player1) #p[0]:name, p[1]:symbol
-        p2 = json.loads(juego.player2)
-
-        # Symbol validation
-        if(p1[1] == p2[1]):
-            return "Error: Same Symbol with other player"
-        # Name validation
+        p2 = json.loads(juego.player2)        
+       
+        # Name validation        
         if move_request.player not in (p1[0], p2[0]):
-            return "Error: Name not found."
-
-        #if juego.next_turn not in (p1[0], p2[0]):
-        #   return "Error: Starting player not found."
-        
+            return "Error: Name not found." 
         # Starting player validation. Not two plays of the same player allowed!
         if juego.next_turn != move_request.player:
             return "Error: It's not your turn."
         
         # Insert logic here!.
+        
         current_player = None
         next_player = None
-        #current winner = None
+        current_winner = None
 
         if(p1[0] == move_request.player):
             current_player = p1
@@ -77,31 +82,43 @@ def submit_play(move_request: schemas.Move, db: Session = Depends(get_db)):
 
         # Deserealize table
         new_board = json.loads(juego.board)
-        # Symbol is assigned in the table
-        new_board[move_request.row - 1][move_request.column - 1]=current_player[1]
-        
-        # No deberia poder jugar sobre un punto ya ocupado por un signo
-        # if new_board[move_request.row - 1][move_request.column - 1] :
-        #     new_board[move_request.row - 1][move_request.column - 1] = current_player[1] 
-        # else:
-        #     return "Error: Point already taken" 
-        
+        # Symbol is assigned in the table.  
+        if new_board[move_request.row - 1][move_request.column - 1] == " " :
+            new_board[move_request.row - 1][move_request.column - 1] = current_player[1] 
+        else:
+            return "Error: Point already taken" 
+
+        total_movements = juego.movements_played + 1             
+                
         move_played = models.Game(
             id = juego.id,
-            movements_played = juego.movements_played + 1,
+            movements_played = total_movements,
             next_turn = next_player[0],
             board = json.dumps(new_board),
             player1 = json.dumps(p1),
             player2 = json.dumps(p2),
-            winner = "None" #current winner: None or p1/2[0]
+            winner = current_winner #current winner: None or p1/2[0]
         )
         GameRepo.update(db, move_played)
         
+        result = isWinner(new_board, p1, p2)
+        if result:
+            move_played.winner = result[0]
+            GameRepo.update(db, move_played)
+            return "Winner is " + result[0]
+        
+        # This conditional check if the board is full
+        if total_movements == 9:
+            move_played.winner = "No winner"
+            GameRepo.update(db, move_played)
+            return "IT'S A TIE!" 
+
         return GameRepo.find_by_id(db, juego.id)
     else:
         raise HTTPException(status_code=404, detail="Error: The game doesn't exist.")
 
 # List all games.
+# /{winner} optional. 
 @app.get('/all_games')
 def get_games(db: Session = Depends(get_db)):
 
@@ -109,7 +126,6 @@ def get_games(db: Session = Depends(get_db)):
     if games:
         return games
     raise HTTPException(status_code=400, detail="Error: None game was founded") #bad sintaxis
-
 
 # Retrieve a single game
 @app.get('/get_game/{id_game}')
@@ -132,7 +148,39 @@ def delete_game(id_game: int, db: Session = Depends(get_db)):
     GameRepo.delete(db, id_game)
     return "Game deleted"
 
-# Start of the API / Setup the Web Server
+def isWinner(board, p1, p2):    
+    # Check the rows
+    for row in range (0, 2):
+        if (board[row][0] == board[row][1] == board[row][2] == p1[1]):            
+            return p1
+   
+        elif (board[row][0] == board[row][1] == board[row][2] == p2[1]):            
+            return p2
+
+    # Check the columns
+    for col in range (0, 2):
+        if (board[0][col] == board[1][col] == board[2][col] == p1[1]):            
+            return p1
+
+        elif (board[0][col] == board[1][col] == board[2][col] == p2[1]):            
+            return p2
+
+    # Check the diagnoals
+    if board[0][0] == board[1][1] == board[2][2] == p1[1]:        
+        return p1
+
+    elif board[0][0] == board[1][1] == board[2][2] == p2[1]:
+        return p2
+
+    elif board[0][2] == board[1][1] == board[2][0] == p1[1]:        
+        return p1
+
+    elif board[0][2] == board[1][1] == board[2][0] == p2[1]:       
+        return p2
+
+    return False
+
+# Setup the Web Server
 # host= "0.0.0.0": Listen all TCP traffic
 # port: endpoint of a network connection between the web server and a web client
 if __name__ == "__main__":
@@ -141,12 +189,6 @@ if __name__ == "__main__":
 ##########################################################
 
 # Improves: 
-# Endpoint ---> "Create a game"#      
-#       * Let the players choose who goes first.
-# Endpoint ---> "Submit a play"
-#       * If a table point is already occupied by a symbol, you cannot overwrite it.
-#       * What happens if there are no more moves? Tie!
-#       * How do you know there is a winner before or after a move?
 # Endpoint ---> "List all games"
 #       * Filter: Finished & Unfinished games (state of the board)
 # General
