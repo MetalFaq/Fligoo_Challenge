@@ -15,7 +15,7 @@ class GameRepo:
                 player1 = json.dumps([game.player1.name, game.player1.symbol]),
                 player2 = json.dumps([game.player2.name, game.player2.symbol]),
                 movements_played = 0,
-                next_turn = game.player1.name, # = str(50). Asigno starting_player
+                next_turn = game.starting_player,
                 board = json.dumps([[" ", " ", " "],[" ", " ", " "],[" ", " ", " "]]),
                 )
             db.add(db_game)

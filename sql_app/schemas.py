@@ -37,8 +37,14 @@ class GameBase(BaseModel):
 
     player1: Player
     player2: Player
-    #starting_player: str               
-        
+    starting_player: str               
+
+    @validator("starting_player", pre=True) 
+    def uppercase_strings(cls, value):
+        if isinstance(value, str):
+            return value.upper()
+        return value
+
 # GameCreate hereda de GameBase sus atributos
 class GameCreate(GameBase):
     pass
@@ -63,7 +69,7 @@ class Move(BaseModel):
     row: int
     column: int
 
-    @validator("player", pre=True) #will be call before the others validators
+    @validator("player", pre=True) 
     def uppercase_strings(cls, value):
         if isinstance(value, str):
             return value.upper()
