@@ -16,7 +16,7 @@ from config.session import engine, get_db
 
 models.Base.metadata.create_all(bind=engine) #Create all tables. 
 #API definition
-app = FastAPI()
+app = FastAPI(title = "Tic Tac Toe", description="Challenge from Fligoo")
 
 #Swagger
 @app.get("/")
@@ -24,7 +24,7 @@ def main():
     return RedirectResponse(url="/docs/")
 
 # Create a game
-@app.post('/newgame')
+@app.post('/newgame', response_model=schemas.GameCreate)
 def new_game(game_request: schemas.GameCreate, db: Session = Depends(get_db)):
     
     # Symbol validation
