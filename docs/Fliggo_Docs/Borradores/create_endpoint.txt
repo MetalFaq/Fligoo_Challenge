@@ -1,0 +1,43 @@
+# TICTACTOE API
+# Python 3.9.7
+
+#Endpoint---> CREATE A GAME:
+POST; url esqueleto: /game?player1Id=<id of player 1>&player2Id=<id of player 2>
+
+input data:
+{
+	"players":[
+		{"name":"me"},
+		{"name":"other"}
+	],
+	"starting_player":"me"
+}
+
+Return data (response body <>):
+{
+"game_id":1234,
+"player":[{"name:"me", "symbol":"X"}, {"name":"other", "symbol":"O"}]
+"movements_played":0,
+"next_turn":"other",
+"board":[[null, null, null],[null, null, null],[null, null, null]],
+"winner":null
+}
+
+Optional improvement ideas:
+*	Let the players choose their symbols. 
+*	Let the players choose who goes first
+*	How can the API validate and handle malformed inputs or invalid data¿?
+
+My idea:
+*	Get the current status of the game before submit a new move. 
+################################################
+Herramientas que voy a necesitar: 
+* SQLite & DB Browser SQLite
+* libreria sqlalchemy
+* libreria p/ fastapi.
+* python.
+* interfaces de programación. 
+
+Verbo a usar para este endpoint: 
+POST base_url/rest/games. 
+The post request contains a representation of a game board, either empty or with the first move made. 

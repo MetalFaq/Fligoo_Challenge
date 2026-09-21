@@ -29,6 +29,14 @@ there was some kind of problem with the input data."
   </li>
 </ul>
 
+## Estado del proyecto
+
+Este repositorio contiene una implementación de referencia de una API de Tic-Tac-Toe: creación de partidas, registro de jugadores, turnos y validación del tablero. La última actualización histórica del repositorio era de agosto de 2022.
+
+La estructura canónica conserva el código de la API (`app.py`, `config` y `sql_app`) y sus dependencias. La documentación histórica recuperada desde el archivo local se encuentra bajo `docs/Fliggo_Docs`. No se versionan entornos virtuales, cachés de Python, bases de datos locales ni configuraciones específicas del IDE.
+
+Esta revisión no certifica el funcionamiento actual del servicio ni la compatibilidad de sus dependencias; antes de desplegarlo se debe crear un entorno virtual nuevo y ejecutar pruebas de la API.
+
 ### Tech
 <ul>
 <li>Python - high-level programming language.</li>

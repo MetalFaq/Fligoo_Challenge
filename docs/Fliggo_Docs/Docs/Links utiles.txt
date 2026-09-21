@@ -1,0 +1,37 @@
+* Repo Joni
+https://github.com/jjcenturion/sist_monetario_API
+
+* Rest Backend TaTeTi 
+https://github.com/farhanafayez/TicTacToe
+
+* API ejemplo
+https://github.com/mahdix/Tic-tac-toe
+
+* Solo de guia (usa Java)
+https://github.com/cralcubo/tic-tac-toe-rest
+
+* SQLite curso muy muy básico para hacer este challenge
+https://www.youtube.com/playlist?list=PL2xycGX1pDXNYpjXHVj-D1UmFIXubEfEY
+
+* Libreria SQLite 3
+https://www.youtube.com/watch?v=uB0928SOTEQ&ab_channel=Dimas
+
+* FastAPI tutorial
+https://www.youtube.com/watch?v=GN6ICac3OXY&ab_channel=Amigoscode
+
+* EJEMPLO FASTAPI CON DATABASE (LEER!!)
+https://towardsdatascience.com/fastapi-cloud-database-loading-with-python-1f531f1d438a
+https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-7-sqlalchemy-database-setup/
+https://christophergs.com/python/2021/12/04/fastapi-ultimate-tutorial/
+
+
+
+######
+* FastAPI & SQLalchemy restapi curd
+https://www.youtube.com/watch?v=6eVj33l5e9M
+
+* Creo que es lo mejor para hacer el challenge
+https://fastapi.tiangolo.com/tutorial/sql-databases/
+
+* Puede servir para la lógica
+https://www.pythonfixing.com/2021/09/fixed-tic-tac-toe-for-two-human-players.html

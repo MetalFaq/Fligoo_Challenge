@@ -1,0 +1,18 @@
+# Base de datos para el challenge
+---> Seguir como ejemplo lo hecho por Jony en su challenge de Sistema Monetario.
+
+1) Crear la base de datos, por ej: en SQLite con DB Browser FOR SQLite. (tictactoe.db)
+2) Relacionar la DB con la aplicación (config -> db.py) / uso de sqlalchemy. Conexión a la base de datos basicamente
+3) Crear el modelo de la/s tabla/s en python. ---> models.py
+4) schemas.py ---> no los entiende bien. 
+5) repositories.py (usas modelos y esquemas) ---> por tabla hecha en la DB. 
+
+# Deficiones:
+1) Models: A model is the single, definitive source of information about your data. 
+   It contains the essential fields and behaviors of the data you’re storing. 
+   Generally, each model maps to a single database table.
+   https://docs.djangoproject.com/en/4.1/topics/db/models/
+
+2) Repositorios por cada tabla:
+   Creo que el proposito de estos repositorios es ordenar de manera prolija, 
+   los verbos a usar al acceder a los endpoint de la api. 
